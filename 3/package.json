@@ -2,15 +2,21 @@
   "name": "scratch",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "cli.js",
+  "bin": {
+    "and-cli": "cli.js"
+  },
   "scripts": {
     "test": "jest"
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "commander": "5.0.0",
+    "shelljs": "0.8.3"
+  },
   "devDependencies": {
     "faker": "^4.1.0",
-    "jest": "25.1.0",
-    "shelljs": "0.8.3"
+    "jest": "25.1.0"
   }
 }
