@@ -1,19 +1,15 @@
 {
     "name": "medium-example-cli",
-    "version": "3.0.0",
+    "version": "2.0.0",
     "description": "",
-    "main": "cli.js",
+    "main": "main.js",
     "private": true,
-    "bin": {
-        "cli": "cli.js"
-    },
     "scripts": {
         "test": "jest"
     },
     "author": "Brandon Scott brandongregoryscott@gmail.com",
     "license": "ISC",
     "dependencies": {
-        "commander": "5.0.0",
         "shelljs": "0.8.3"
     },
     "devDependencies": {

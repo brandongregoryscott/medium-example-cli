@@ -35,7 +35,7 @@ const dotnetBuild = {
         shell.echo(`Building solution (via ${this.cmd()})...`);
 
         const buildResult = shell.exec(this.cmd(), { silent: true });
-        shell.echo(formatters.dotnet(buildResult));
+        shell.echo(buildResult);
 
         if (buildResult.code !== 0) {
             echo.error("Solution failed to build. See output for details.");
