@@ -1,23 +1,17 @@
-#!/usr/bin/env node
+// -----------------------------------------------------------------------------------------
+// #region Imports
+// -----------------------------------------------------------------------------------------
 
-/**************************************************************************************************
- * Imports
- **************************************************************************************************/
-
-const dir           = require("./dir");
-const file          = require("./file");
-const dotnetClean   = require("./dotnet-clean");
-const dotnetPath    = require("./dotnet-path");
+const dotnetClean = require("./dotnet-clean");
+const dotnetPath = require("./dotnet-path");
 const dotnetRestore = require("./dotnet-restore");
-const echo          = require("./echo");
-const formatters    = require("./formatters");
-const shell         = require("shelljs");
-const variables     = require("./variables");
+const shell = require("shelljs");
 
+// #endregion Imports
 
-/**************************************************************************************************
- * Functions
- **************************************************************************************************/
+// -----------------------------------------------------------------------------------------
+// #region Dotnet build command object
+// -----------------------------------------------------------------------------------------
 
 const dotnetBuild = {
     cmd() {
@@ -27,7 +21,7 @@ const dotnetBuild = {
         return `Builds the dotnet project (via ${this.cmd()})`;
     },
     run(clean, restore) {
-
+        // Verify that the solution path exists or exit early.
         dotnetPath.solutionPathOrExit();
 
         if (clean) {
@@ -38,7 +32,7 @@ const dotnetBuild = {
             dotnetRestore.run();
         }
 
-        echo.message(`Building solution (via ${this.cmd()})...`);
+        shell.echo(`Building solution (via ${this.cmd()})...`);
 
         const buildResult = shell.exec(this.cmd(), { silent: true });
         shell.echo(formatters.dotnet(buildResult));
@@ -52,9 +46,12 @@ const dotnetBuild = {
     },
 };
 
+// #endregion Dotnet build command object
 
-/**************************************************************************************************
- * Exports
- **************************************************************************************************/
+// -----------------------------------------------------------------------------------------
+// #region Exports
+// -----------------------------------------------------------------------------------------
 
 module.exports = dotnetBuild;
+
+// #endregion Exports

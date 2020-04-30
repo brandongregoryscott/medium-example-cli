@@ -13,14 +13,19 @@ const shell = require("shelljs");
 // -----------------------------------------------------------------------------------------
 
 const dotnetRestore = {
-    cmd: "dotnet restore",
+    cmd() {
+        return "dotnet restore";
+    },
     description() {
-        return `Restore the dotnet solution from the root of the project (via ${this.cmd})`;
+        return `Restore the dotnet solution from the root of the project (via ${this.cmd()})`;
     },
     run() {
+        // Verify that the solution path exists or exit early.
+        dotnetPath.solutionPathOrExit();
+
         dir.pushd(dotnetPath.solutionDir());
-        shell.echo(`Restoring nuget packages (via ${this.cmd})...`);
-        shell.exec(this.cmd);
+        shell.echo(`Restoring nuget packages (via ${this.cmd()})...`);
+        shell.exec(this.cmd());
         shell.echo("Dotnet solution restored");
         dir.popd();
     },
