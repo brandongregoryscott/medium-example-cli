@@ -9,6 +9,11 @@ const shell = require("shelljs");
 
 // #endregion Imports
 describe("restoreDotnetSolution", () => {
+    let mockDir;
+    beforeEach(() => {
+        mockDir = faker.random.word();
+    });
+
     describe("deleteIfExists", () => {
         test("when directory does not exist, it does not call shell.rm", () => {
             // Arrange
@@ -16,7 +21,7 @@ describe("restoreDotnetSolution", () => {
             const shellRmSpy = jest.spyOn(shell, "rm").mockImplementation();
 
             // Act
-            dir.deleteIfExists(faker.random.word());
+            dir.deleteIfExists(mockDir);
 
             // Assert
             expect(shellRmSpy).not.toHaveBeenCalled();
@@ -28,10 +33,38 @@ describe("restoreDotnetSolution", () => {
             const shellRmSpy = jest.spyOn(shell, "rm").mockImplementation();
 
             // Act
-            dir.deleteIfExists(faker.random.word());
+            dir.deleteIfExists(mockDir);
 
             // Assert
             expect(shellRmSpy).toHaveBeenCalled();
+        });
+    });
+
+    describe("popd", () => {
+        test("it calls shell.popd with '-q' flag", () => {
+            // Arrange
+            const shellPopdSpy = jest.spyOn(shell, "popd").mockImplementation();
+
+            // Act
+            dir.popd(mockDir);
+
+            // Assert
+            expect(shellPopdSpy).toHaveBeenCalledWith("-q", mockDir);
+        });
+    });
+
+    describe("pushd", () => {
+        test("it calls shell.pushd with '-q' flag", () => {
+            // Arrange
+            const shellPushdSpy = jest
+                .spyOn(shell, "pushd")
+                .mockImplementation();
+
+            // Act
+            dir.pushd(mockDir);
+
+            // Assert
+            expect(shellPushdSpy).toHaveBeenCalledWith("-q", mockDir);
         });
     });
 });
