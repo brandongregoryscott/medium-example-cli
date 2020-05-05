@@ -8,7 +8,7 @@ describe("restoreDotnetSolution", () => {
         jest.restoreAllMocks();
     });
 
-    describe("getFirstFile", () => {
+    describe("getFirstFile()", () => {
         test("when more than 1 file is found, it returns the first one", () => {
             // Arrange
             jest.spyOn(shell, "ls").mockImplementation(() => [
@@ -24,7 +24,7 @@ describe("restoreDotnetSolution", () => {
         });
     });
 
-    describe("getSolutionPath", () => {
+    describe("getSolutionPath()", () => {
         test("when no solution file is found, it returns undefined", () => {
             // Arrange & Act
             const result = sut.getSolutionPath();
@@ -46,7 +46,7 @@ describe("restoreDotnetSolution", () => {
         });
     });
 
-    describe("solutionPathOrExit", () => {
+    describe("solutionPathOrExit()", () => {
         test("when no solution file is found, it returns calls shell.exit with exit code 1", () => {
             // Arrange
             const shellExitSpy = jest
@@ -63,7 +63,7 @@ describe("restoreDotnetSolution", () => {
         });
     });
 
-    describe("restoreDotnetSolution", () => {
+    describe("restoreDotnetSolution()", () => {
         test("when solutionPathOrExit fails to find the path, it calls shell.exit with exit code 1", () => {
             // Arrange
             jest.spyOn(sut, "solutionPathOrExit").mockImplementation(() => {
