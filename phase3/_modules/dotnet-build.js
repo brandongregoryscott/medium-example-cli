@@ -38,7 +38,7 @@ const dotnetBuild = {
         shell.echo(buildResult);
 
         if (buildResult.code !== 0) {
-            echo.error("Solution failed to build. See output for details.");
+            shell.echo("Solution failed to build. See output for details.");
             shell.exit(buildResult.code);
         }
 

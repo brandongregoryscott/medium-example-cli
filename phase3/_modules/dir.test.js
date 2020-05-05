@@ -8,7 +8,8 @@ const fs = require("fs");
 const shell = require("shelljs");
 
 // #endregion Imports
-describe("restoreDotnetSolution", () => {
+
+describe("dir", () => {
     let mockDir;
     beforeEach(() => {
         mockDir = faker.random.word();
