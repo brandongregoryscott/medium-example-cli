@@ -52,5 +52,19 @@ describe("dotnetBuild", () => {
             // Assert
             expect(dotnetRestoreSpy).toHaveBeenCalled();
         });
+
+        test("when dotnet command returns non-zero exit code, it calls shell.exit with that code", () => {
+            // Arrange
+            const exitCode = faker.random.number({ min: 1 });
+            jest.spyOn(shell, "exec").mockImplementation(() => {
+                return { code: exitCode };
+            });
+
+            // Act
+            dotnetBuild.run(faker.random.boolean(), faker.random.boolean());
+
+            // Assert
+            expect(shellExitSpy).toHaveBeenCalledWith(exitCode);
+        });
     });
 });
