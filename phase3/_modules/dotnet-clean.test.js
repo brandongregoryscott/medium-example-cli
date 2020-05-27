@@ -4,8 +4,6 @@
 
 const dotnetPath = require("./dotnet-path");
 const dotnetClean = require("./dotnet-clean");
-const dotnetRestore = require("./dotnet-restore");
-const faker = require("faker");
 const shell = require("shelljs");
 
 // #endregion Imports
@@ -16,7 +14,6 @@ describe("dotnetClean", () => {
         dotnetPathSpy = jest
             .spyOn(dotnetPath, "solutionPathOrExit")
             .mockImplementation();
-
     });
 
     describe("run", () => {
