@@ -2,7 +2,6 @@
 // #region Imports
 // -----------------------------------------------------------------------------------------
 
-const dir = require("./dir");
 const dotnetPath = require("./dotnet-path");
 const shell = require("shelljs");
 
@@ -14,7 +13,7 @@ const shell = require("shelljs");
 
 const dotnetRestore = {
     cmd() {
-        return "dotnet restore";
+        return `dotnet ${dotnetPath.solutionPath()} restore`;
     },
     description() {
         return `Restore the dotnet solution from the root of the project (via ${this.cmd()})`;
@@ -23,11 +22,17 @@ const dotnetRestore = {
         // Verify that the solution path exists or exit early.
         dotnetPath.solutionPathOrExit();
 
-        dir.pushd(dotnetPath.solutionDir());
         shell.echo(`Restoring nuget packages (via ${this.cmd()})...`);
-        shell.exec(this.cmd());
+
+        const restoreResult = shell.exec(this.cmd());
+        if (restoreResult.code !== 0) {
+            shell.echo("Solution failed to restore. See output for details.");
+            shell.exit(restoreResult.code);
+        }
+
         shell.echo("Dotnet solution restored");
-        dir.popd();
+
+        return restoreResult.code;
     },
 };
 

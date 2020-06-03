@@ -32,7 +32,6 @@ describe("dotnetPath", () => {
         });
     });
 
-
     describe("solutionPath", () => {
         test("when file.first returns a non-null value, it returns that value", () => {
             // Arrange
