@@ -19,7 +19,17 @@ describe("dotnetPath", () => {
     });
 
     describe("solutionDir", () => {
+        test("when solutionPath() returns undefined, it returns '.'", () => {
+            // Arrange
+            const solutionPathSpy = jest.spyOn(dotnetPath, "solutionPath").mockImplementation(() => undefined);
 
+            // Act
+            const result = dotnetPath.solutionDir();
+
+            // Assert
+            expect(solutionPathSpy).toHaveBeenCalledTimes(1);
+            expect(result).toBe(".");
+        });
     });
 
 
