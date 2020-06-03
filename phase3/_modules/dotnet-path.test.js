@@ -3,6 +3,7 @@
 // -----------------------------------------------------------------------------------------
 
 const file = require("./file");
+const shell = require("shelljs");
 
 // #endregion Imports
 
@@ -11,6 +12,7 @@ describe("dotnetPath", () => {
     beforeEach(() => {
         // Due to the way the dotnetPath module caches values, we need to isolate the module in each
         // test to prevent side effects and test behavior properly.
+        // See https://stackoverflow.com/questions/48989643/how-to-reset-module-imported-between-tests
         jest.isolateModules(() => {
             dotnetPath = require("./dotnet-path");
         });
@@ -52,6 +54,29 @@ describe("dotnetPath", () => {
     });
 
     describe("solutionPathOrExit", () => {
+        test("when solutionPath() returns a value, it returns that value", () => {
+            // Arrange
+            const solutionPathSpy = jest.spyOn(dotnetPath, "solutionPath").mockImplementation(() => "Example.sln");
 
+            // Act
+            const result = dotnetPath.solutionPathOrExit();
+
+            // Assert
+            expect(solutionPathSpy).toHaveBeenCalledTimes(1);
+            expect(result).toBe("Example.sln");
+        });
+
+        test("when solutionPath() returns undefined, it calls shell.exit", () => {
+            // Arrange
+            const solutionPathSpy = jest.spyOn(dotnetPath, "solutionPath").mockImplementation(() => undefined);
+            const shellExitSpy = jest.spyOn(shell, "exit").mockImplementation();
+
+            // Act
+            dotnetPath.solutionPathOrExit();
+
+            // Assert
+            expect(solutionPathSpy).toHaveBeenCalledTimes(1);
+            expect(shellExitSpy).toHaveBeenCalledWith(1);
+        });
     });
 });
