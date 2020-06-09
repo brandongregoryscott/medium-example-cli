@@ -1,3 +1,5 @@
+#!/bin/bash
+
 DOTNET_SOLUTION_FILE_PATH=/home/brandon/projects/DotnetExample
 
 # Restores dotnet solution nuget dependencies

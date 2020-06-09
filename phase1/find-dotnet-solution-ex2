@@ -1,31 +1,21 @@
 #!/bin/bash
+
 DOTNET_SOLUTION_FILE_PATH=""
 
 # Checks three common locations under the current directory for a .sln file, or exits if one
 # is not found. If found, DOTNET_SOLUTION_FILE_PATH is set to the value.
 findDotnetSolution() {
-    LS_RESULT=`ls *.sln`
+    for PATH_PATTERN in *.sln dotnet/*.sln dotnet/*/*.sln
+    do
+        LS_RESULT=`ls $PATH_PATTERN`
 
-    # If the exit status of that ls command is 0, it means at least one file matching the pattern exists.
-    if [ $? -eq 0 ];
-    then
-        echo "Dotnet solution found."
-        DOTNET_SOLUTION_FILE_PATH=$LS_RESULT
-    fi;
-
-    LS_RESULT=`ls dotnet/*.sln`
-    if [ $? -eq 0 ];
-    then
-        echo "Dotnet solution found."
-        DOTNET_SOLUTION_FILE_PATH=$LS_RESULT
-    fi;
-
-    LS_RESULT=`ls dotnet/*/*.sln`
-    if [ $? -eq 0 ];
-    then
-        echo "Dotnet solution found: $LS_RESULT"
-        DOTNET_SOLUTION_FILE_PATH=$LS_RESULT
-    fi;
+        # If the exit status of that ls command is 0, it means at least one file matching the pattern exists.
+        if [ $? -eq 0 ];
+        then
+            echo "Dotnet solution found."
+            DOTNET_SOLUTION_FILE_PATH=$LS_RESULT
+        fi;
+    done
 
     if [[ $DOTNET_SOLUTION_FILE_PATH = "" ]];
     then
