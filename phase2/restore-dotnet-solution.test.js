@@ -1,12 +1,26 @@
+// -----------------------------------------------------------------------------------------
+// #region Imports
+// -----------------------------------------------------------------------------------------
+
 const faker = require("faker");
 const shell = require("shelljs");
 const sut = require("./restore-dotnet-solution");
+
+// #endregion Imports
+
+// -----------------------------------------------------------------------------------------
+// #region Tests
+// -----------------------------------------------------------------------------------------
 
 describe("restoreDotnetSolution", () => {
     afterEach(() => {
         // Clear out any mocked functions and restore their original implementations after each test
         jest.restoreAllMocks();
     });
+
+    // -----------------------------------------------------------------------------------------
+    // #region getFirstFile
+    // -----------------------------------------------------------------------------------------
 
     describe("getFirstFile", () => {
         test("when more than 1 file is found, it returns the first one", () => {
@@ -23,6 +37,12 @@ describe("restoreDotnetSolution", () => {
             expect(result).toBe("file1.jpg");
         });
     });
+
+    // #endregion getFirstFile
+
+    // -----------------------------------------------------------------------------------------
+    // #region getSolutionPath
+    // -----------------------------------------------------------------------------------------
 
     describe("getSolutionPath", () => {
         test("when no solution file is found, it returns undefined", () => {
@@ -46,6 +66,12 @@ describe("restoreDotnetSolution", () => {
         });
     });
 
+    // #endregion getSolutionPath
+
+    // -----------------------------------------------------------------------------------------
+    // #region solutionPathOrExit
+    // -----------------------------------------------------------------------------------------
+
     describe("solutionPathOrExit", () => {
         test("when no solution file is found, it returns calls shell.exit with exit code 1", () => {
             // Arrange
@@ -62,6 +88,12 @@ describe("restoreDotnetSolution", () => {
             expect(shellExitSpy).toBeCalledWith(1);
         });
     });
+
+    // #endregion solutionPathOrExit
+
+    // -----------------------------------------------------------------------------------------
+    // #region restoreDotnetSolution
+    // -----------------------------------------------------------------------------------------
 
     describe("restoreDotnetSolution", () => {
         test("when solutionPathOrExit fails to find the path, it calls shell.exit with exit code 1", () => {
@@ -101,4 +133,8 @@ describe("restoreDotnetSolution", () => {
             expect(shellExitSpy).toBeCalledWith(exitCode);
         });
     });
+
+    // #endregion restoreDotnetSolution
 });
+
+// #endregion Tests

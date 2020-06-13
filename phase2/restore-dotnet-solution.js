@@ -1,7 +1,23 @@
+// -----------------------------------------------------------------------------------------
+// #region Imports
+// -----------------------------------------------------------------------------------------
+
 const shell = require("shelljs");
+
+// #endregion Imports
+
+// -----------------------------------------------------------------------------------------
+// #region Variables
+// -----------------------------------------------------------------------------------------
 
 // Wild-card searches used when finding the solution file. Ordered by most to least performant
 const solutionFilePaths = ["*.sln", "dotnet/*.sln", "dotnet/*/*.sln"];
+
+// #endregion Variables
+
+// -----------------------------------------------------------------------------------------
+// #region Functions
+// -----------------------------------------------------------------------------------------
 
 /**
  * Returns the first match of the provided file expression
@@ -57,6 +73,12 @@ function solutionPathOrExit() {
     shell.exit(1);
 }
 
+// #endregion Functions
+
+// -----------------------------------------------------------------------------------------
+// #region Exports
+// -----------------------------------------------------------------------------------------
+
 const restoreDotnetSolutionModule = {
     getSolutionPath,
     getFirstFile,
@@ -65,3 +87,5 @@ const restoreDotnetSolutionModule = {
 };
 
 module.exports = restoreDotnetSolutionModule;
+
+// #endregion Exports

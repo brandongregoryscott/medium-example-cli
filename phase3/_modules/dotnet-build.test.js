@@ -11,6 +11,10 @@ const shell = require("shelljs");
 
 // #endregion Imports
 
+// -----------------------------------------------------------------------------------------
+// #region Tests
+// -----------------------------------------------------------------------------------------
+
 describe("dotnetBuild", () => {
     let dotnetCleanSpy;
     let dotnetPathSpy;
@@ -27,6 +31,10 @@ describe("dotnetBuild", () => {
             .mockImplementation();
         shellExitSpy = jest.spyOn(shell, "exit").mockImplementation();
     });
+
+    // -----------------------------------------------------------------------------------------
+    // #region run
+    // -----------------------------------------------------------------------------------------
 
     describe("run", () => {
         test("it verifies the dotnet solution can be found by calling dotnetPath module", () => {
@@ -67,4 +75,8 @@ describe("dotnetBuild", () => {
             expect(shellExitSpy).toHaveBeenCalledWith(exitCode);
         });
     });
+
+    // #endregion run
 });
+
+// #endregion Tests

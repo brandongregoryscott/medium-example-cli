@@ -7,6 +7,10 @@ const shell = require("shelljs");
 
 // #endregion Imports
 
+// -----------------------------------------------------------------------------------------
+// #region Tests
+// -----------------------------------------------------------------------------------------
+
 describe("dotnetPath", () => {
     let dotnetPath;
     beforeEach(() => {
@@ -18,10 +22,16 @@ describe("dotnetPath", () => {
         });
     });
 
+    // -----------------------------------------------------------------------------------------
+    // #region solutionDir
+    // -----------------------------------------------------------------------------------------
+
     describe("solutionDir", () => {
         test("when solutionPath() returns undefined, it returns '.'", () => {
             // Arrange
-            const solutionPathSpy = jest.spyOn(dotnetPath, "solutionPath").mockImplementation(() => undefined);
+            const solutionPathSpy = jest
+                .spyOn(dotnetPath, "solutionPath")
+                .mockImplementation(() => undefined);
 
             // Act
             const result = dotnetPath.solutionDir();
@@ -32,10 +42,18 @@ describe("dotnetPath", () => {
         });
     });
 
+    // #endregion solutionDir
+
+    // -----------------------------------------------------------------------------------------
+    // #region solutionPath
+    // -----------------------------------------------------------------------------------------
+
     describe("solutionPath", () => {
         test("when file.first returns a non-null value, it returns that value", () => {
             // Arrange
-            const fileFirstSpy = jest.spyOn(file, "first").mockImplementation(() => "Example.sln");
+            const fileFirstSpy = jest
+                .spyOn(file, "first")
+                .mockImplementation(() => "Example.sln");
 
             // Act
             const result = dotnetPath.solutionPath();
@@ -47,7 +65,9 @@ describe("dotnetPath", () => {
 
         test("when called consecutively, it returns the cached value", () => {
             // Arrange
-            const fileFirstSpy = jest.spyOn(file, "first").mockImplementation(() => "Example.sln");
+            const fileFirstSpy = jest
+                .spyOn(file, "first")
+                .mockImplementation(() => "Example.sln");
 
             // Act
             const result1 = dotnetPath.solutionPath();
@@ -62,10 +82,18 @@ describe("dotnetPath", () => {
         });
     });
 
+    // #endregion solutionPath
+
+    // -----------------------------------------------------------------------------------------
+    // #region solutionPathOrExit
+    // -----------------------------------------------------------------------------------------
+
     describe("solutionPathOrExit", () => {
         test("when solutionPath() returns a value, it returns that value", () => {
             // Arrange
-            const solutionPathSpy = jest.spyOn(dotnetPath, "solutionPath").mockImplementation(() => "Example.sln");
+            const solutionPathSpy = jest
+                .spyOn(dotnetPath, "solutionPath")
+                .mockImplementation(() => "Example.sln");
 
             // Act
             const result = dotnetPath.solutionPathOrExit();
@@ -77,7 +105,9 @@ describe("dotnetPath", () => {
 
         test("when solutionPath() returns undefined, it calls shell.exit", () => {
             // Arrange
-            const solutionPathSpy = jest.spyOn(dotnetPath, "solutionPath").mockImplementation(() => undefined);
+            const solutionPathSpy = jest
+                .spyOn(dotnetPath, "solutionPath")
+                .mockImplementation(() => undefined);
             const shellExitSpy = jest.spyOn(shell, "exit").mockImplementation();
 
             // Act
@@ -88,4 +118,8 @@ describe("dotnetPath", () => {
             expect(shellExitSpy).toHaveBeenCalledWith(1);
         });
     });
+
+    // #endregion solutionPathOrExit
 });
+
+// #endregion Tests

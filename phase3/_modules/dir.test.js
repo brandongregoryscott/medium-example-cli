@@ -9,11 +9,19 @@ const shell = require("shelljs");
 
 // #endregion Imports
 
+// -----------------------------------------------------------------------------------------
+// #region Tests
+// -----------------------------------------------------------------------------------------
+
 describe("dir", () => {
     let mockDir;
     beforeEach(() => {
         mockDir = faker.random.word();
     });
+
+    // -----------------------------------------------------------------------------------------
+    // #region deleteIfExists
+    // -----------------------------------------------------------------------------------------
 
     describe("deleteIfExists", () => {
         test("when directory does not exist, it does not call shell.rm", () => {
@@ -41,6 +49,12 @@ describe("dir", () => {
         });
     });
 
+    // #endregion deleteIfExists
+
+    // -----------------------------------------------------------------------------------------
+    // #region popd
+    // -----------------------------------------------------------------------------------------
+
     describe("popd", () => {
         test("it calls shell.popd with '-q' flag", () => {
             // Arrange
@@ -53,6 +67,12 @@ describe("dir", () => {
             expect(shellPopdSpy).toHaveBeenCalledWith("-q", mockDir);
         });
     });
+
+    // #endregion popd
+
+    // -----------------------------------------------------------------------------------------
+    // #region pushd
+    // -----------------------------------------------------------------------------------------
 
     describe("pushd", () => {
         test("it calls shell.pushd with '-q' flag", () => {
@@ -68,4 +88,8 @@ describe("dir", () => {
             expect(shellPushdSpy).toHaveBeenCalledWith("-q", mockDir);
         });
     });
+
+    // #endregion pushd
 });
+
+// #endregion Tests

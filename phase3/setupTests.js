@@ -1,4 +1,14 @@
+// -----------------------------------------------------------------------------------------
+// #region Imports
+// -----------------------------------------------------------------------------------------
+
 const shell = require("shelljs");
+
+// #endregion Imports
+
+// -----------------------------------------------------------------------------------------
+// #region Mocks
+// -----------------------------------------------------------------------------------------
 
 // Globally mocking shell.echo to suppress additional output
 shell.echo = jest.fn();
@@ -10,3 +20,5 @@ shell.exec = jest.fn(() => {
 
 // Globally mocking shell.exit to prevent exit calls from killing tests
 shell.exit = jest.fn();
+
+// #endregion Mocks

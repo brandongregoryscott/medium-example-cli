@@ -1,6 +1,16 @@
 #!/usr/bin/env node
 
+// -----------------------------------------------------------------------------------------
+// #region Imports
+// -----------------------------------------------------------------------------------------
+
 const program = require("commander");
+
+// #endregion Imports
+
+// -----------------------------------------------------------------------------------------
+// #region Entrypoint / Command router
+// -----------------------------------------------------------------------------------------
 
 // Description to display to the user when running the cli without arguments
 program.description("Example cli written using ShellJS and Commander");
@@ -15,3 +25,5 @@ program.command(
 // Attempt to parse the arguments passed in and defer to subcommands, if any.
 // If no arguments are passed in, this will automatically display the help information for the user.
 program.parse(process.argv);
+
+// #endregion Entrypoint / Command router
